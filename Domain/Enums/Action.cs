@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-    public enum Status
+    public enum Action
     {
-        Created = 0,
-        Paid = 1,
-        Finished = 2,
-        Canceled = 3,
-        Refounded = 4,
+        Pay = 0,
+        Finish = 1, // after your guest uses and pays
+        Cancel = 2,
+        Refound = 3,
+        Reopen = 4,
+
     }
 }
