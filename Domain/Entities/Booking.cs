@@ -10,10 +10,6 @@ namespace Domain.Entities
 {
     public class Booking
     {
-        public Booking() 
-        {
-            this.Status = Status.Created;
-        }
         public int Id { get; set; }
         public DateTime Start {get; set;}
         public DateTime End {get; set;}
@@ -30,7 +26,7 @@ namespace Domain.Entities
                 (Status.Created, Action.Cancel) => Status.Canceled,
                 (Status.Paid, Action.Finish) => Status.Finished,
                 (Status.Paid, Action.Refound) => Status.Refounded,
-                (Status.Canceled, Action.Reopen) => Status.Created,
+                (Status.Created, Action.Reopen) => Status.Created,
                 _ => this.Status
             };
         }
