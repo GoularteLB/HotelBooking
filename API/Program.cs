@@ -1,6 +1,20 @@
+using Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
+
+#region DB Wiring up
+var connectionString = builder.Configuration.GetConnectionString("Main");
+builder.Services.AddDbContext<HotelDbContext>(
+    options => options.UseSqlServer(connectionString)
+
+    );
+#endregion
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
