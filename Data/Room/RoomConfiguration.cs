@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data
+namespace Data.Room
 {
     public class RoomConfiguration : IEntityTypeConfiguration<Room>
     {

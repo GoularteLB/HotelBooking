@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities = Domain.Entities;
 
-namespace Data
+namespace Data.Guest
 {
     public class GuestConfiguration : IEntityTypeConfiguration<Entities.Guest>
     {
-      public void Configure(EntityTypeBuilder<Entities.Guest> builder)
+        public void Configure(EntityTypeBuilder<Entities.Guest> builder)
         {
             builder.HasKey(x => x.Id);
             builder.OwnsOne(x => x.DocumentId)
