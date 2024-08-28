@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
@@ -12,6 +13,8 @@ namespace Domain.Entities
         public string Name { get; set; }
         public int Level { get; set; }
         public bool InMaintenance { get; set; }
+
+        public Price Price { get; set; }
 
         public bool IsAvilable
         {
