@@ -23,21 +23,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2EB755
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A727DD1B-6138-4E3E-8647-22C95E89E519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTests", "DomainTests\DomainTests.csproj", "{AD621644-2B49-463F-A3E8-D130B3787157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainTests", "DomainTests\DomainTests.csproj", "{AD621644-2B49-463F-A3E8-D130B3787157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTests", "ApplicationTests\ApplicationTests.csproj", "{E8A01032-DC1A-42A9-A765-8B16FB04995B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTests", "ApplicationTests\ApplicationTests.csproj", "{E8A01032-DC1A-42A9-A765-8B16FB04995B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{876A7EF4-EFB8-4ED2-B57A-6E37D65C063F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptersTests", "AdaptersTests\AdaptersTests.csproj", "{4A1585A0-5D83-4AE1-B79D-A8A12EAFB40A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptersTests", "AdaptersTests\AdaptersTests.csproj", "{4A1585A0-5D83-4AE1-B79D-A8A12EAFB40A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{1AEC29DA-8233-45A8-8DFE-A81827F6A2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{1AEC29DA-8233-45A8-8DFE-A81827F6A2FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{29543B1C-F207-4214-BE31-D212D3551F49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{29543B1C-F207-4214-BE31-D212D3551F49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{06B2D3BD-D1FE-4BCC-B3F9-BBFB2D55CFAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{06B2D3BD-D1FE-4BCC-B3F9-BBFB2D55CFAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{EC1DD316-1AE1-47A7-9E89-FE55CB8ABBC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{EC1DD316-1AE1-47A7-9E89-FE55CB8ABBC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

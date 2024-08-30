@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Entities = Domain.Entities;
+using Data.Rooms;
+using Data.Guest;
 
 namespace Data
 {
