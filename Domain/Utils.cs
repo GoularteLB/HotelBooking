@@ -10,7 +10,7 @@ namespace Domain.UtilsTools
     {
         public static bool ValidateEmail(string email)
         {
-            if(email == "b@b.com") return false;
+            if(string.IsNullOrEmpty(email)) return false;
 
             return true;
         }

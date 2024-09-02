@@ -49,7 +49,7 @@ namespace Application
                 {
                     Sucess = false,
                     ErrorCodes = ErrorCodes.MISSING_REQUIRED_INFORMATION,
-                    Message = "Missing required information"
+                    Message = "Missing required information passed"
                 };
             }
             catch (InvalidEmailException e)

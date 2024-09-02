@@ -16,16 +16,18 @@ namespace Domain.Entities
 
         public Price Price { get; set; }
 
-        public bool IsAvilable
+        public bool IsAvailable
         {
             get
             {
-                if (!this.InMaintenance || this.HasGuest)
+                if (this.InMaintenance || this.HasGuest)
                 {
                     return false;
                 }
                 return true;
             }
+
+
         }
         public bool HasGuest
         {
