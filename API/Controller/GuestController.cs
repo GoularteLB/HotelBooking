@@ -3,6 +3,7 @@ using Application.Guest.DTO;
 using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace API.Controller
 {
@@ -57,6 +58,15 @@ namespace API.Controller
             _logger.LogError("Response with unknown ErrorCode return", rest);
                 return BadRequest(500);
 
+        }
+        [HttpGet]
+        public async Task<ActionResult<GuestDTO>> Get(int guestId)
+        {
+            var res = await _guestManager.GetGuest(guestId);
+
+            if(res.Sucess) return Created("", res.Data);
+
+            return BadRequest(res);
         }
     }
 }

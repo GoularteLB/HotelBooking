@@ -8,6 +8,7 @@ using Application.Guest.DTO;
 using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Application.Guest.Responses;
+using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Ports;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -70,6 +71,25 @@ namespace Application
                     Message = "There was an error when saving to db"
                 };
             }
+        }
+        public async Task<GuestResponse> GetGuest(int guestId)
+        {
+            var gues = await _guestRepository.Get(guestId);
+
+            if(guestId == null)
+            {
+                return new GuestResponse
+                {
+                    Sucess = false,
+                    ErrorCodes = ErrorCodes.GUEST_NOT_FOUND,
+                    Message = "No Guest record was guest id"
+                };
+            }
+            return new GuestResponse
+            {
+                Data = GuestDTO.MapToDTO(guest),
+                Sucess = true,
+            }; 
         }
     }
 }
