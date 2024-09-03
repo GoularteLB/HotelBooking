@@ -74,9 +74,9 @@ namespace Application
         }
         public async Task<GuestResponse> GetGuest(int guestId)
         {
-            var gues = await _guestRepository.Get(guestId);
+            var guest = await _guestRepository.Get(guestId);
 
-            if(guestId == null)
+            if(guest == null)
             {
                 return new GuestResponse
                 {
@@ -87,7 +87,7 @@ namespace Application
             }
             return new GuestResponse
             {
-                Data = GuestDTO.MapToDTO(guest),
+                Data = GuestDTO.MapToDto(guest),
                 Sucess = true,
             }; 
         }

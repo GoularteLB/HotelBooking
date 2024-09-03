@@ -46,6 +46,51 @@ namespace ApplicationTests
             Assert.AreEqual(result.Data.Id, expectedId);
             Assert.AreEqual(result.Data.Name, guestDto.Name);
         }
+        [Test]
+        public async Task Shoud_Return_GuestNotFound_When_GuestDoesExist()
+        {
+            var fakeRepo = new Mock<IGuestRepository>();
+
+            fakeRepo.Setup(x => x.Get(333)).Returns(Task.FromResult<Guest?>(null));
+
+            guestManager = new GuestManager(fakeRepo.Object);
+
+            var result = await guestManager.GetGuest(333);
+
+            Assert.IsNotNull(result);
+            Assert.False(result.Sucess);
+            Assert.AreEqual(result.ErrorCodes, ErrorCodes.GUEST_NOT_FOUND);
+            Assert.AreEqual(result.Message, "No Guest record was guest id");
+        }
+        [Test]
+        public async Task Shoud_Return_GuestSucess()
+        {
+            var fakeRepo = new Mock<IGuestRepository>();
+
+            var fakeGuest = new Guest()
+            {
+                Id = 333,
+                Name = "Test",
+                DocumentId = new Domain.ValueObjects.PersonId
+                {
+                    DocumentType = Domain.Enums.DocumentType.DriveLicence,
+                    IdNumber = "123"
+                }
+
+            };
+
+            fakeRepo.Setup(x => x.Get(333)).Returns(Task.FromResult((Guest?)fakeGuest));
+
+            guestManager = new GuestManager(fakeRepo.Object);
+
+            var result = await guestManager.GetGuest(333);
+
+            Assert.IsNotNull(result);
+            Assert.True(result.Sucess);
+            Assert.AreEqual(result.Data.Id, fakeGuest.Id);
+            Assert.AreEqual(result.Data.Name, fakeGuest.Name);
+        }
+
         [TestCase(" ")]
         [TestCase("a")]
         [TestCase("ab")]

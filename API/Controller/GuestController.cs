@@ -36,7 +36,7 @@ namespace API.Controller
 
             if (rest.ErrorCodes == ErrorCodes.NOT_FOUND)
             {
-                return BadRequest(rest);
+                return NotFound(rest);
             }
             if (rest.ErrorCodes == ErrorCodes.INVALID_PERSON_ID)
             {
@@ -66,7 +66,7 @@ namespace API.Controller
 
             if(res.Sucess) return Created("", res.Data);
 
-            return BadRequest(res);
+            return NotFound(res);
         }
     }
 }

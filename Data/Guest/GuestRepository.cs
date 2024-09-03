@@ -10,7 +10,7 @@ namespace Data.Guest
 {
     public class GuestRepository : IGuestRepository
     {
-        private HotelDbContext _hotelDbContext;
+        private readonly HotelDbContext _hotelDbContext;
 
         public GuestRepository(HotelDbContext hotelDbContext)
         {
@@ -23,9 +23,9 @@ namespace Data.Guest
             return guest.Id;
         }
 
-        public Task<Domain.Entities.Guest> Get(int id)
+        public Task<Domain.Entities.Guest?> Get(int Id)
         {
-           return _hotelDbContext.Guests.Where(g => g.Id == id).FirstOrDefaultAsync();
+           return _hotelDbContext.Guests.Where(g => g.Id == Id).FirstOrDefaultAsync();
         }
     }
 }

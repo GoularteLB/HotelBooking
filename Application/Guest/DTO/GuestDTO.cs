@@ -30,12 +30,9 @@ namespace Application.Guest.DTO
                     IdNumber = guestDTO.IdNumber,
                     DocumentType = (DocumentType)guestDTO.IdTypeCode
                 }
-
             };
-          
-
         }
-        public static DTO.GuestDTO MapToDto(Entities.Guest guest)
+        public static GuestDTO MapToDto(Entities.Guest guest)
         {
             return new GuestDTO
             {
@@ -45,7 +42,6 @@ namespace Application.Guest.DTO
                 IdTypeCode = (int)guest.DocumentId.DocumentType,
                 Name = guest.Name,
                 Surname= guest.Surname,
-
             };
         }
     }
