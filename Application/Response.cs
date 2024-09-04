@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application
+namespace Application.Responses
 {
     public enum ErrorCodes
     {
@@ -15,6 +15,13 @@ namespace Application
         INVALID_EMAIL= 5,
         GUEST_NOT_FOUND = 6,
 
+        
+        ROOM_NOT_FOUND = 100,
+        ROOM_COULD_NOT_STORE_DATA = 101,
+        ROOM_INVAID_PERSON_ID= 102,
+        ROOM_MISSING_REQUIRED_INFORMATION = 103,
+        ROOM_INVALID_EMAIL = 104,
+        ROOM_GUEST_NOT_FOUND = 105
     }
     public class Response
     {

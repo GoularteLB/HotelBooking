@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Guest.DTO;
 
-namespace Application.Responses
+namespace Domain.Exceptions
 {
-    public class GuestResponse : Response
+    public class MissingRequiredInformation : Exception
     {
-        public GuestDTO? Data;
+
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Exceptions
+namespace Domain.Room.Exceptions
 {
-    public class InvalidPersonDocumentIdException:Exception
+    public class InvalidRoomDataException : Exception
     {
-
     }
 }

@@ -5,20 +5,20 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Guest.DTO;
-using Application.Guest.Ports;
+using Application.Ports;
 using Application.Guest.Requests;
-using Application.Guest.Responses;
+using Application.Responses;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Ports;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Application
+namespace Application.Guest
 {
     public class GuestManager : IGuestManager
     {
         private IGuestRepository _guestRepository;
-        public GuestManager(IGuestRepository guestRepository) 
+        public GuestManager(IGuestRepository guestRepository)
         {
             _guestRepository = guestRepository;
         }
@@ -33,9 +33,9 @@ namespace Application
                 {
                     Data = request.Data,
                     Sucess = true,
-                };           
-            } 
-             catch (InvalidPersonDocumentIdException e)
+                };
+            }
+            catch (InvalidPersonDocumentIdException e)
             {
                 return new GuestResponse
                 {
@@ -76,7 +76,7 @@ namespace Application
         {
             var guest = await _guestRepository.Get(guestId);
 
-            if(guest == null)
+            if (guest == null)
             {
                 return new GuestResponse
                 {
@@ -89,7 +89,7 @@ namespace Application
             {
                 Data = GuestDTO.MapToDto(guest),
                 Sucess = true,
-            }; 
+            };
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities = Domain.Entities;
+using Entities = Domain.Guest.Entities;
 
 namespace Application.Guest.DTO
 {
@@ -17,9 +17,9 @@ namespace Application.Guest.DTO
         public string IdNumber { get; set; }
         public int IdTypeCode { get; set; }
 
-        public static Entities.Guest MapToEntity(GuestDTO guestDTO)
+        public static Domain.Entities.Guest MapToEntity(GuestDTO guestDTO)
         {
-            return new Entities.Guest
+            return new Domain.Entities.Guest
             {
                 Id = guestDTO.Id,
                 Name = guestDTO.Name,
@@ -32,7 +32,7 @@ namespace Application.Guest.DTO
                 }
             };
         }
-        public static GuestDTO MapToDto(Entities.Guest guest)
+        public static GuestDTO MapToDto(Domain.Entities.Guest guest)
         {
             return new GuestDTO
             {

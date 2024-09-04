@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Exceptions
 {
-    public class MissingRequiredInformation : Exception
+    public class InvalidPersonDocumentIdException : Exception
     {
-        
+
     }
 }

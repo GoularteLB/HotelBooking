@@ -1,5 +1,4 @@
 ﻿using Domain.Exceptions;
-using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.UtilsTools;
 using Domain.Ports;
+using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
     public class Guest
     {
-       public int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
@@ -28,22 +28,23 @@ namespace Domain.Entities
                 throw new InvalidPersonDocumentIdException();
             }
 
-            if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Surname) || string.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Surname) || string.IsNullOrEmpty(Email))
             {
                 throw new MissingRequiredInformation();
             }
-            if (Utils.ValidateEmail(this.Email) == false)
+            if (Utils.ValidateEmail(Email) == false)
             {
                 throw new InvalidEmailException();
             }
         }
         public async Task Save(IGuestRepository guestRepository)
         {
-            this.ValidateState();
-            if(this.Id == 0)
+            ValidateState();
+            if (Id == 0)
             {
-                this.Id = await guestRepository.Create(this);
-            }else
+                Id = await guestRepository.Create(this);
+            }
+            else
             {
                 //await guestRepository.Update(this);
             }
