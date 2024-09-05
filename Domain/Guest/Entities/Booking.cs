@@ -1,4 +1,6 @@
-﻿using Domain.Enums;
+﻿using Domain.Booking;
+using Domain.Booking.Exceptions;
+using Domain.Enums;
 using Domain.Room.Entities;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,54 @@ namespace Domain.Guest.Entities
                 (Status.Canceled, Action.Reopen) => Status.Created,
                 _ => Status
             };
+        }
+        public bool IsValid()
+        {
+            try
+            {
+                this.ValidateState();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private void ValidateState()
+        {
+            if(this.PlaceAt == null)
+            {
+                throw new PlacedIsRequiredInformationException();
+            }
+            if (this.Start == null)
+            {
+
+            }
+            if (this.End == null)
+            {
+
+            }
+            if (this.Room == null)
+            {
+
+            }
+            if (this.Guest == null)
+            {
+
+            }
+        }
+        public async Task Save(IBookingRepository bookingRepository)
+        {
+            this.ValidateState();
+            if (this.Id == 0)
+            {
+                var resp = await bookingRepository.CreateBooking(this);
+                this.Id = resp.Id;
+            }
+            else 
+            {
+                
+            }
         }
     }
 }
