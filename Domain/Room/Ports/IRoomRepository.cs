@@ -12,5 +12,6 @@ namespace Domain.Room.Ports
     {
         Task<Entities.Room> Get(int Id);
         Task<int> Create(Entities.Room guest);
+        Task<Entities.Room> GetAgregate(int Id);    
     }
 }

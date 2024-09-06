@@ -12,7 +12,7 @@ namespace Domain.Room.Entities
         public int Level { get; set; }
         public bool InMaintenance { get; set; }
         public Price Price { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<Guest.Entities.Booking> Bookings { get; set; }
 
         public bool IsAvailable
         {
@@ -39,7 +39,7 @@ namespace Domain.Room.Entities
 
                 return this.Bookings?.Where(
                     b => b.Room.Id == this.Id &&
-                    notAvailableStatuses.Contains(b.CurrentStatus)).Count() > 0;
+                    notAvailableStatuses.Contains(b.Status)).Count() > 0;
             }
         }
 

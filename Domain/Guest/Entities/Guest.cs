@@ -37,6 +37,13 @@ namespace Domain.Entities
                 throw new InvalidEmailException();
             }
         }
+        public bool IsValidate()
+        {
+           
+                this.ValidateState();
+                return true;
+           
+        }
         public async Task Save(IGuestRepository guestRepository)
         {
             ValidateState();

@@ -35,7 +35,7 @@ namespace Application.Guest
                     Sucess = true,
                 };
             }
-            catch (InvalidPersonDocumentIdException e)
+            catch (InvalidPersonDocumentIdException)
             {
                 return new GuestResponse
                 {
@@ -44,7 +44,7 @@ namespace Application.Guest
                     Message = "The Id passed is not valid"
                 };
             }
-            catch (MissingRequiredInformation e)
+            catch (MissingRequiredInformation)
             {
                 return new GuestResponse
                 {
@@ -53,7 +53,7 @@ namespace Application.Guest
                     Message = "Missing required information passed"
                 };
             }
-            catch (InvalidEmailException e)
+            catch (InvalidEmailException )
             {
                 return new GuestResponse
                 {

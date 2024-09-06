@@ -1,10 +1,10 @@
-using Application;
 using Application.Guest;
 using Application.Guest.DTO;
 using Application.Guest.Requests;
-using Domain.Guest.Entities;
-using Domain.Guest.Enums;
-using Domain.Guest.Ports;
+using Application.Responses;
+using Domain.Entities;
+using Domain.Enums;
+using Domain.Ports;
 using Moq;
 
 namespace ApplicationTests

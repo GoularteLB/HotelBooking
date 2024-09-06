@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Booking.Exceptions
 {
-    internal class PlacedIsRequiredInformationException : Exception
+    public class EndDateTimeRequiredException : Exception
     {
+
+
     }
 }

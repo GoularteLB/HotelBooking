@@ -33,7 +33,8 @@ namespace Domain.Booking.DTO
                 Start = bookingdto.Start,
                 Guest = new Entities.Guest() { Id = bookingdto.Id},
                 Room = new Room.Entities.Room() { Id = bookingdto.Id},
-                End = bookingdto.End
+                End = bookingdto.End,
+                PlaceAt = bookingdto.PlaceAt,
             };
         } 
     }

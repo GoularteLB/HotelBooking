@@ -1,8 +1,16 @@
+using Application.Booking;
+using Application.Booking.Ports;
 using Application.Guest;
 using Application.Ports;
+using Application.Room;
+using Application.Room.Ports;
 using Data;
+using Data.Booking;
 using Data.Guest;
+using Data.Room;
+using Domain.Booking;
 using Domain.Ports;
+using Domain.Room.Ports;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +22,10 @@ builder.Services.AddControllers();
 #region IoC
 builder.Services.AddScoped<IGuestManager, GuestManager>();
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();
+builder.Services.AddScoped<IRoomManager, RoomManager>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IBookingManager, BookingManager>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 #endregion
 
 #region DB Wiring up
