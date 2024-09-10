@@ -32,10 +32,11 @@ namespace Application.Responses
 
         //Payment relate codes 500 - 1500
         PAYMENT_INVALIDPAYMENT_INTENTION = 500,
+        PAYMENT_PROVIDER_NOT_IMPLEMENTED = 501,
     }
-    public class Response
+    public abstract class Response
     {
-        public bool Sucess { get; set; }
+        public bool Success { get; set; }
         public string Message { get; set; }
         public ErrorCodes ErrorCodes { get; set; }
     }

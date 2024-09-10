@@ -1,13 +1,10 @@
-﻿
-
-public enum Status
+﻿public enum Status
 {
-    Sucess = 0,
+    Success = 0,
     Fail = 1,
     Error = 2,
     Undefine = 3,
 }
-
 
 namespace Application.Payment.DTO
 {
@@ -15,7 +12,7 @@ namespace Application.Payment.DTO
     {
         public Status Status { get; set; }
         public string PaymentId { get; set; }
-        public DateTime CreditDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string Message { get; set; }
     }
 }

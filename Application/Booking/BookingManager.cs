@@ -1,4 +1,7 @@
-﻿using Application.Booking.Ports;
+﻿using Application.Booking.DTO;
+using Application.Booking.Ports;
+using Application.Payment.Ports;
+using Application.Payment.Responses;
 using Application.Responses;
 using Domain.Booking;
 using Domain.Booking.DTO;
@@ -19,13 +22,16 @@ namespace Application.Booking
         private readonly IBookingRepository _bookingRepository;
         private readonly IGuestRepository _guestRepository;
         private readonly IRoomRepository _roomRepository;
+        private readonly IPaymentProcesorFactory _paymentProcessorFactory;
         public BookingManager(IBookingRepository bookingRepository,
                               IGuestRepository guestRepository,
-                              IRoomRepository roomRepository) 
+                              IRoomRepository roomRepository,
+                              IPaymentProcesorFactory paymentProcesorFactory) 
         {
             _bookingRepository = bookingRepository;
             _guestRepository = guestRepository;
             _roomRepository = roomRepository;
+            _paymentProcessorFactory = paymentProcesorFactory;
         }
 
         public async Task<BookingResponse> CreateBooking(BookingDto bookingDto)
@@ -41,7 +47,7 @@ namespace Application.Booking
                 bookingDto.Id = bookingDto.Id;
                 return new BookingResponse
                 {
-                    Sucess = true,
+                    Success = true,
                     Data = bookingDto,
                 };
             }
@@ -49,7 +55,7 @@ namespace Application.Booking
             {
                 return new BookingResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.BOOKING_MISSING_REQUIRED_INFORMATION,
                     Message = "PlacedAt is required information"
                 };
@@ -58,7 +64,7 @@ namespace Application.Booking
             {
                 return new BookingResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.BOOKING_MISSING_REQUIRED_INFORMATION,
                     Message = "Start is required information"
                 };
@@ -67,7 +73,7 @@ namespace Application.Booking
             {
                 return new BookingResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.BOOKING_MISSING_REQUIRED_INFORMATION,
                     Message = "Room is required information"
                 };
@@ -76,7 +82,7 @@ namespace Application.Booking
             {
                 return new BookingResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.BOOKING_MISSING_REQUIRED_INFORMATION,
                     Message = "Guest is required information"
                 };
@@ -85,15 +91,32 @@ namespace Application.Booking
             {
                 return new BookingResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.BOOKING_COULD_NOT_STORE_DATA,
                 };
             }
         }
-
         public Task<BookingDto> GetBooking(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<PaymentResponse> PayForBooking(PaymentRequestDto paymentRequestDto)
+        {
+            var paymentProcessor = _paymentProcessorFactory.GetPaymentProcesor(paymentRequestDto.SelectedPaymentProviders);
+
+            var response = await paymentProcessor.CapturePayment(paymentRequestDto.PaymentIntention);
+
+            if (response.Success)
+            {
+                return new PaymentResponse
+                {
+                    Success = true,
+                    Data = response.Data,
+                    Message = "Payment sucessfully process"
+                };
+            }
+            return response;
         }
     }
 }

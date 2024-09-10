@@ -27,7 +27,7 @@ namespace Application.Room
 
                 return new RoomResponse
                 {
-                    Sucess = true,
+                    Success = true,
                     Data = request.Data,
                 };
             }
@@ -36,7 +36,7 @@ namespace Application.Room
 
                 return new RoomResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.ROOM_MISSING_REQUIRED_INFORMATION,
                     Message = "Missing required information passed"
                 };
@@ -45,7 +45,7 @@ namespace Application.Room
             {
                 return new RoomResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.ROOM_COULD_NOT_STORE_DATA,
                     Message = "There was an error when saving to DB"
                 };

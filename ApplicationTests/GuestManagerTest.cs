@@ -44,7 +44,7 @@ namespace ApplicationTests
 
             var result = await guestManager.CreateGuest(request);
             Assert.IsNotNull(result);
-            Assert.True(result.Sucess);
+            Assert.True(result.Success);
             Assert.AreEqual(result.Data.Id, expectedId);
             Assert.AreEqual(result.Data.Name, guestDto.Name);
         }
@@ -60,7 +60,7 @@ namespace ApplicationTests
             var result = await guestManager.GetGuest(333);
 
             Assert.IsNotNull(result);
-            Assert.False(result.Sucess);
+            Assert.False(result.Success);
             Assert.AreEqual(result.ErrorCodes, ErrorCodes.GUEST_NOT_FOUND);
             Assert.AreEqual(result.Message, "No Guest record was guest id");
         }
@@ -88,7 +88,7 @@ namespace ApplicationTests
             var result = await guestManager.GetGuest(333);
 
             Assert.IsNotNull(result);
-            Assert.True(result.Sucess);
+            Assert.True(result.Success);
             Assert.AreEqual(result.Data.Id, fakeGuest.Id);
             Assert.AreEqual(result.Data.Name, fakeGuest.Name);
         }
@@ -120,7 +120,7 @@ namespace ApplicationTests
 
             var result = await guestManager.CreateGuest(request);
             Assert.IsNotNull(result);
-            Assert.False(result.Sucess);
+            Assert.False(result.Success);
             Assert.AreEqual(result.ErrorCodes, ErrorCodes.INVALID_PERSON_ID);
             Assert.AreEqual(result.Message, "The Id passed is not valid");
         }
@@ -150,7 +150,7 @@ namespace ApplicationTests
 
             var result = await guestManager.CreateGuest(request);
             Assert.IsNotNull(result);
-            Assert.False(result.Sucess);
+            Assert.False(result.Success);
             Assert.AreEqual(result.ErrorCodes, ErrorCodes.MISSING_REQUIRED_INFORMATION);
             Assert.AreEqual(result.Message, "Missing required information passed");
         }

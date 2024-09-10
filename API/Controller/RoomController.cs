@@ -33,7 +33,7 @@ namespace API.Controller
 
             var result = await _roomManager.CreateRoom(request);
 
-            if (result.Sucess) return Created("", result.Data);
+            if (result.Success) return Created("", result.Data);
 
             else if (result.ErrorCodes == ErrorCodes.ROOM_MISSING_REQUIRED_INFORMATION)
             {

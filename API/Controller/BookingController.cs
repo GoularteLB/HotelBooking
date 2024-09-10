@@ -1,7 +1,11 @@
-﻿using Application.Booking.Ports;
+﻿using Application.Booking;
+using Application.Booking.DTO;
+using Application.Booking.Ports;
+using Application.Payment.Responses;
 using Application.Responses;
 using Azure.Core;
 using Domain.Booking.DTO;
+using Domain.Guest.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller
@@ -20,11 +24,25 @@ namespace API.Controller
             
         }
         [HttpPost]
+        [Route("{booking.Id}/Pay")]
+        public async Task<ActionResult<PaymentResponse>> Pay(
+            PaymentRequestDto paymentRequestDto,
+            int bookingId)
+        {
+            paymentRequestDto.BookingId = bookingId;
+            var resp = await _bookingManager.PayForBooking(paymentRequestDto);
+
+            if(resp.Success) return Ok(resp.Data);
+
+            return BadRequest(resp);
+        }
+
+        [HttpPost]
         public async Task<ActionResult<BookingDto>> Post(BookingDto booking)
         {
             var result = await _bookingManager.CreateBooking(booking);
 
-            if (result.Sucess) return Created("", result.Data);
+            if (result.Success) return Created("", result.Data);
 
             else if (result.ErrorCodes == ErrorCodes.BOOKING_MISSING_REQUIRED_INFORMATION)
             {

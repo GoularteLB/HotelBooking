@@ -32,14 +32,14 @@ namespace Application.Guest
                 return new GuestResponse
                 {
                     Data = request.Data,
-                    Sucess = true,
+                    Success = true,
                 };
             }
             catch (InvalidPersonDocumentIdException)
             {
                 return new GuestResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.INVALID_PERSON_ID,
                     Message = "The Id passed is not valid"
                 };
@@ -48,7 +48,7 @@ namespace Application.Guest
             {
                 return new GuestResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.MISSING_REQUIRED_INFORMATION,
                     Message = "Missing required information passed"
                 };
@@ -57,7 +57,7 @@ namespace Application.Guest
             {
                 return new GuestResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.INVALID_EMAIL,
                     Message = "The Email is not valid"
                 };
@@ -66,7 +66,7 @@ namespace Application.Guest
             {
                 return new GuestResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.COULD_NOT_STORE_DATA,
                     Message = "There was an error when saving to db"
                 };
@@ -80,7 +80,7 @@ namespace Application.Guest
             {
                 return new GuestResponse
                 {
-                    Sucess = false,
+                    Success = false,
                     ErrorCodes = ErrorCodes.GUEST_NOT_FOUND,
                     Message = "No Guest record was guest id"
                 };
@@ -88,7 +88,7 @@ namespace Application.Guest
             return new GuestResponse
             {
                 Data = GuestDTO.MapToDto(guest),
-                Sucess = true,
+                Success = true,
             };
         }
     }

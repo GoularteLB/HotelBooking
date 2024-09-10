@@ -34,7 +34,7 @@ namespace API.Controller
             };
             var rest = await _guestManager.CreateGuest(request);
 
-            if (rest.Sucess) return Created("", rest.Data);
+            if (rest.Success) return Created("", rest.Data);
 
             if (rest.ErrorCodes == ErrorCodes.NOT_FOUND)
             {
@@ -66,7 +66,7 @@ namespace API.Controller
         {
             var res = await _guestManager.GetGuest(guestId);
 
-            if(res.Sucess) return Created("", res.Data);
+            if(res.Success) return Created("", res.Data);
 
             return NotFound(res);
         }
