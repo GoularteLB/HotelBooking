@@ -1,15 +1,11 @@
-﻿using Application.Payment.Ports;
+﻿using Application.Payment;
+using Application.Payment.Ports;
 using Application.Payment.Responses;
 using Application.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Payment.Application
+namespace Payments.Application
 {
-    public class NotImplementedPaymentProvider : IPaymentProcesor
+    public class NotImplementedPaymentProvider : IPaymentProcessor
     {
         public Task<PaymentResponse> CapturePayment(string paymentIntention)
         {
@@ -17,8 +13,9 @@ namespace Payment.Application
             {
                 Success = false,
                 ErrorCodes = ErrorCodes.PAYMENT_PROVIDER_NOT_IMPLEMENTED,
-                Message = "The select payment provider is not avalible at this moment"
+                Message = "The selected payment provider is not available at the moment"
             };
+
             return Task.FromResult(paymentResponse);
         }
     }

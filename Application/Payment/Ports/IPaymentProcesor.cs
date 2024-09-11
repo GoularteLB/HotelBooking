@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Payment.Ports
 {
-    public interface IPaymentProcesor
+    public interface IPaymentProcessor
     {
         Task<PaymentResponse> CapturePayment(string paymentIntention);
     }

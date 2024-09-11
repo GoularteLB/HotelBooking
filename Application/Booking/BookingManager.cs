@@ -22,16 +22,16 @@ namespace Application.Booking
         private readonly IBookingRepository _bookingRepository;
         private readonly IGuestRepository _guestRepository;
         private readonly IRoomRepository _roomRepository;
-        private readonly IPaymentProcesorFactory _paymentProcessorFactory;
+        private readonly IPaymentProcessorFactory _paymentProcessorFactory;
         public BookingManager(IBookingRepository bookingRepository,
-                              IGuestRepository guestRepository,
-                              IRoomRepository roomRepository,
-                              IPaymentProcesorFactory paymentProcesorFactory) 
+            IRoomRepository roomRepository,
+            IGuestRepository guestRepository,
+            IPaymentProcessorFactory paymentProcessorFactory)
         {
             _bookingRepository = bookingRepository;
             _guestRepository = guestRepository;
             _roomRepository = roomRepository;
-            _paymentProcessorFactory = paymentProcesorFactory;
+            _paymentProcessorFactory = paymentProcessorFactory;
         }
 
         public async Task<BookingResponse> CreateBooking(BookingDto bookingDto)
@@ -40,7 +40,7 @@ namespace Application.Booking
             {
                 var booking = BookingDto.MapToEntity(bookingDto);
                 booking.Guest = await _guestRepository.Get(bookingDto.GuestId);
-                booking.Room = await _roomRepository.GetAgregate(bookingDto.RoomId);
+                booking.Room = await _roomRepository.GetAggregate(bookingDto.RoomId);
 
                 await booking.Save(_bookingRepository);
 
@@ -103,7 +103,7 @@ namespace Application.Booking
 
         public async Task<PaymentResponse> PayForBooking(PaymentRequestDto paymentRequestDto)
         {
-            var paymentProcessor = _paymentProcessorFactory.GetPaymentProcesor(paymentRequestDto.SelectedPaymentProviders);
+            var paymentProcessor = _paymentProcessorFactory.GetPaymentProcessor(paymentRequestDto.selectedPaymentProvider);
 
             var response = await paymentProcessor.CapturePayment(paymentRequestDto.PaymentIntention);
 
@@ -113,7 +113,7 @@ namespace Application.Booking
                 {
                     Success = true,
                     Data = response.Data,
-                    Message = "Payment sucessfully process"
+                    Message = "Payment successfully processed"
                 };
             }
             return response;

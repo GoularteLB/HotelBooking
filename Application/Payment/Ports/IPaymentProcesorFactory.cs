@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Payment.Ports
 {
-    public interface IPaymentProcesorFactory
+    public interface IPaymentProcessorFactory
     {
-        IPaymentProcesor GetPaymentProcesor(SuportPaymentProviders selectPaymentProviders);
+        IPaymentProcessor GetPaymentProcessor(SupportedPaymentProviders selectPaymentProviders);
     }
 }

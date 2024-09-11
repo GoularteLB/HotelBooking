@@ -12,7 +12,7 @@ namespace Application.Payment.DTO
     {
         public Status Status { get; set; }
         public string PaymentId { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string Message { get; set; }
     }
 }

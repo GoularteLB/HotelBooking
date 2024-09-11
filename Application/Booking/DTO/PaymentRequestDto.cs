@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace Application.Booking.DTO
 {
-    public enum SuportPaymentProviders
+    public enum SupportedPaymentProviders
     {
-        PayPal = 0,
-        Strike = 1,
-        PagSeguro = 2,
-        MercadoPago = 3,
+        PayPal = 1,
+        Stripe = 2,
+        PagSeguro = 3,
+        MercadoPago = 4,
 
     }
-    public enum SuportPaymentMethods
+    public enum SupportedPaymentMethods
     {
-        DebitCard = 0,
-        CreditCard = 1,
-        BankTransfer = 2,
+        DebitCard = 1,
+        CreditCard = 2,
+        BankTransfer = 3,
     }
     public class PaymentRequestDto
     {
         public int BookingId { get; set; }
         public string PaymentIntention { get; set; }
-        public SuportPaymentProviders SelectedPaymentProviders { get; set; }
-        public SuportPaymentMethods SelectedPaymentMethods { get; set; }
+        public SupportedPaymentProviders selectedPaymentProvider { get; set; }
+        public SupportedPaymentMethods SelectedPaymentMethod { get; set; }
     }
 }

@@ -22,16 +22,16 @@ namespace ApplicationTests
         {
             var dto = new PaymentRequestDto
             {
-                SelectedPaymentProviders = SuportPaymentProviders.MercadoPago,
-                SelectedPaymentMethods = SuportPaymentMethods.CreditCard,
-                PaymentIntention = ""
+                selectedPaymentProvider = SupportedPaymentProviders.MercadoPago,
+                SelectedPaymentMethod = SupportedPaymentMethods.CreditCard,
+                PaymentIntention = "https://www.mercadopago.com.br/asdf"
             };
 
             var bookingRepository = new Mock<IBookingRepository>();
             var roomRepository = new Mock<IRoomRepository>();
             var guestRepository = new Mock<IGuestRepository>();
-            var paymentProcessorFactory = new Mock<IPaymentProcesorFactory>();
-            var paymentProcessor = new Mock<IPaymentProcesor>();
+            var paymentProcessorFactory = new Mock<IPaymentProcessorFactory>();
+            var paymentProcessor = new Mock<IPaymentProcessor>();
 
             var responseDto = new PaymentStateDto
             {
@@ -53,15 +53,14 @@ namespace ApplicationTests
                .Returns(Task.FromResult(response));
 
             paymentProcessorFactory
-             .Setup(x => x.GetPaymentProcesor(dto.SelectedPaymentProviders))
+             .Setup(x => x.GetPaymentProcessor(dto.selectedPaymentProvider))
              .Returns(paymentProcessor.Object);
 
             var bookingManager = new BookingManager(
-               bookingRepository.Object,
-               (IGuestRepository)roomRepository.Object,
-               (IRoomRepository)guestRepository.Object,
-               paymentProcessorFactory.Object
-               );
+                 bookingRepository.Object,
+                roomRepository.Object,
+                guestRepository.Object,
+                 paymentProcessorFactory.Object);
 
             var res = await bookingManager.PayForBooking(dto);
 
