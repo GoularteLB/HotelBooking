@@ -32,7 +32,7 @@ builder.Services.AddScoped<IRoomManager, RoomManager>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IBookingManager, BookingManager>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
-builder.Services.AddScoped<IPaymentProcesorFactory, PaymentProcesorFactory > ();
+builder.Services.AddScoped<IPaymentProcessorFactory, PaymentProcesorFactory > ();
 
 #endregion
 
