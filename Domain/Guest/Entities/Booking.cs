@@ -5,6 +5,7 @@ using Domain.Guest.Exceptions;
 using Domain.Room.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Domain.Guest.Entities
 {
     public class Booking
     {
-
+        
         public Booking()
         {
             Status = Status.Created;
@@ -28,7 +29,7 @@ namespace Domain.Guest.Entities
         public Domain.Entities.Guest Guest { get; set; }
         public DateTime PlaceAt { get; set; }
         public Status Status { get; set; }
-
+        
  
 
         public void ChangState(Action action)

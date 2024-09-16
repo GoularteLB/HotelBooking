@@ -1,30 +1,39 @@
 ﻿using Application.Booking;
+using Application.Booking.Commands;
 using Application.Booking.DTO;
 using Application.Booking.Ports;
+using Application.Booking.Queries;
 using Application.Payment.Responses;
 using Application.Responses;
 using Azure.Core;
+using Data.Booking;
+using Domain.Booking;
 using Domain.Booking.DTO;
 using Domain.Guest.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller
 {
     [ApiController]
-    [Route("/Controller")]
+    [Route("[controller]")]
     public class BookingController : ControllerBase
     {
         private readonly ILogger<BookingController> _logger;
         private readonly IBookingManager _bookingManager;
+        private readonly IBookingRepository _bookingRepository;
+        private readonly IMediator _mediator;
+
         public BookingController(IBookingManager bookingManager,
-            ILogger<BookingController> logger)
+            ILogger<BookingController> logger,
+            IMediator mediator, IBookingRepository bookingRepository)
         {
             _logger = logger;
             _bookingManager = bookingManager;
-            
+            _bookingRepository = bookingRepository;
         }
         [HttpPost]
-        [Route("{booking.Id}/Pay")]
+        [Route("{bookingId}/Pay")]
         public async Task<ActionResult<PaymentResponse>> Pay(
             PaymentRequestDto paymentRequestDto,
             int bookingId)
@@ -38,9 +47,14 @@ namespace API.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<BookingDto>> Post(BookingDto booking)
+        public async Task<ActionResult<BookingResponse>> Post(BookingDto booking)
         {
-            var result = await _bookingManager.CreateBooking(booking);
+
+            var command = new CreateBookingCommand
+            {
+                bookingDto = booking
+            };
+            var result = await _mediator.Send(command);
 
             if (result.Success) return Created("", result.Data);
 
@@ -55,6 +69,21 @@ namespace API.Controller
 
             _logger.LogError("Response with unknown ErrorCode Returned", result);
             return BadRequest(500);
+        }
+        [HttpGet]
+        public async Task<ActionResult<BookingDto>> Get(int id)
+        {
+            var query = new GetBookingQuery
+            {
+                Id = id
+            };
+
+            var res = await _mediator.Send(query);
+
+            if (res.Success) return Created("", res.Data);
+
+            _logger.LogError("Could not process the request", res);
+            return BadRequest(res);
         }
     }
 }

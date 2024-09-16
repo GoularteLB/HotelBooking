@@ -29,6 +29,8 @@ namespace Application.Responses
         BOOKING_MISSING_REQUIRED_INFORMATION = 203,
         BOOKING_INVALID_EMAIL = 204,
         BOOKING_GUEST_NOT_FOUND = 205,
+        BOOKING_ROOM_CANNOT_BE_BOOKED = 206,
+
 
         //Payment relate codes 500 - 1500
         PAYMENT_INVALIDPAYMENT_INTENTION = 500,

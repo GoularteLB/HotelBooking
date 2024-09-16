@@ -25,17 +25,31 @@ namespace Domain.Booking.DTO
         public DateTime PlaceAt { get; set; }
         private Status Status { get; set; }
 
-        public static Guest.Entities.Booking MapToEntity(BookingDto bookingdto)
+        public static Guest.Entities.Booking MapToEntity(BookingDto bookingDto)
         {
             return new Guest.Entities.Booking
             {
-                Id = bookingdto.Id,
-                Start = bookingdto.Start,
-                Guest = new Entities.Guest() { Id = bookingdto.Id},
-                Room = new Room.Entities.Room() { Id = bookingdto.Id},
-                End = bookingdto.End,
-                PlaceAt = bookingdto.PlaceAt,
+                Id = bookingDto.Id,
+                Start = bookingDto.Start,
+                Guest = new Entities.Guest { Id = bookingDto.GuestId },
+                Room = new Room.Entities.Room { Id = bookingDto.RoomId },
+                End = bookingDto.End,
+                PlaceAt = bookingDto.PlaceAt,
             };
-        } 
+        }
+        public static BookingDto MapToDto(Guest.Entities.Booking booking)
+        {
+            return new BookingDto
+            {
+                Id = booking.Id,
+                End = booking.End,
+                GuestId = booking.Guest.Id,
+                PlaceAt = booking.PlaceAt,
+                RoomId = booking.Room.Id,
+                Status = booking.Status,
+                Start = booking.Start,
+            };
+        }
     }
 }
+

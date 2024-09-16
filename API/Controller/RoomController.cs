@@ -1,8 +1,11 @@
 ﻿using Application.Ports;
 using Application.Responses;
+using Application.Room.Command;
 using Application.Room.Dtos;
 using Application.Room.Ports;
+using Application.Room.Queries;
 using Application.Room.Request;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
 
@@ -14,24 +17,27 @@ namespace API.Controller
     {
         private readonly ILogger<RoomController> _logger;
         private readonly IRoomManager _roomManager;
+        private readonly IMediator _mediator;
 
         public RoomController(
             ILogger<RoomController> logger,
-            IRoomManager roomManager
+            IRoomManager roomManager,
+             IMediator mediator
             )
         {
             _logger = logger;
             _roomManager = roomManager;
+            _mediator = mediator;
         }
-        [HttpPost]
+          [HttpPost]
         public async Task<ActionResult<RoomDto>> Post(RoomDto room)
         {
-            var request = new CreateRoomRequest()
+            var request = new CreateRoomCommand
             {
-                Data = room
+                RoomDto = room
             };
 
-            var result = await _roomManager.CreateRoom(request);
+            var result = await _mediator.Send(request);
 
             if (result.Success) return Created("", result.Data);
 
@@ -46,6 +52,20 @@ namespace API.Controller
 
             _logger.LogError("Response with unknown ErrorCode Returned", result);
             return BadRequest(500);
+        }
+        [HttpGet]
+        public async Task<ActionResult<RoomDto>> Get(int roomId)
+        {
+            var query = new GetRoomQuery
+            {
+                Id = roomId
+            };
+
+            var res = await _mediator.Send(query);
+
+            if (res.Success) return Ok(res.Data);
+
+            return NotFound(res);
         }
     }
 }
