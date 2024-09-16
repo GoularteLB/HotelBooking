@@ -36,7 +36,7 @@ namespace Application.Booking.Commands
         {
             try
             {
-                var bookingDto = request.bookingDto;
+                var bookingDto = request.BookingDto;
                 var booking = BookingDto.MapToEntity(bookingDto);
                 booking.Guest = await _guestRepository.Get(bookingDto.GuestId);
                 booking.Room = await _roomRepository.GetAggregate(bookingDto.RoomId);
